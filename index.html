@@ -4,20 +4,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assests/style/style.css">
+  <link rel="stylesheet" href="./assets/style/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 
   <title>Document fg</title>
 </head>
 
 <body>
-  <img width="150px" height="150px" class="hover-preview img-preview"
-    src="https://dummyimage.com/800x800/111/fff&text=Hover-me"
-    data-preview="https://dummyimage.com/800x800/111/fff&text=1|https://dummyimage.com/800x800/111/fff&text=2|https://dummyimage.com/800x800/111/fff&text=3" />
 
-  <img  class="hover-preview img-preview img2"
-    src="https://dummyimage.com/800x800/111/fff&text=Hover-me" />
 
-  <p>ddfsdfgfdd</p>
+  <html>
+
+  <body>
+    <article>
+      <header>
+        hover-preview Library Demo
+      </header>
+      <main>
+        <div class="album">
+          <div class="img-container">
+            <img class="hover-preview img-preview img-1" src="" style="border-radius:50%" />
+            <i class="fas fa-play"></i>
+          </div>
+          <div>
+            <h2>Use is as a preview of a gallery</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit odio quas adipisci maxime facere quibusdam
+              quidem obcaecati! Corrupti, laborum facilis!</p>
+          </div>
+
+
+        </div>
+
+        <div class="album">
+
+          <div>
+            <h2>Or as a preview for a video</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam nisi perferendis itaque earum optio
+              architecto eos minima. Voluptatum, nulla aperiam!</p>
+          </div>
+          <div class="img-container">
+            <img class="hover-preview img-preview img-2" src="" />
+            <i class="fas fa-play"></i>
+          </div>
+
+        </div>
+
+        <div class="album">
+          <div class="img-container">
+            <img class="hover-preview img-preview img-3 " src="" style="border-radius:20%" />
+            <i class="fas fa-play"></i>
+          </div>
+          <div>
+            <h2>Fuga consectetur eum</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, neque, obcaecati itaque veniam est
+              accusamus quaerat voluptas quas recusandae voluptatem, totam fuga consectetur eum exercitationem soluta
+              ullam autem molestiae dolorum.</p>
+          </div>
+
+        </div>
+      </main>
+      <footer>
+      </footer>
+    </article>
+  </body>
+
+  </html>
+
+
+
 
   <!-- <script type="text/javascript" src='https://raw.githubusercontent.com/AviKKi/hover-preview/main/dist/hover-preview.min.js'></script> -->
   <script src="../src/hover-preview.min.js"></script>
@@ -25,29 +79,56 @@
 
   <script>
 
-    const array = [
-    "../assests/img/norway/seth-kane-XOEAHbE_vO8-unsplash.jpg",
-    "../assests/img/norway/michael-fousert-0962p7mcux4-unsplash.jpg",
-     
+    imgList = [];
 
-    ];
 
-    function createDataPreviewAtribute(imgArray) {
-      console.log(imgArray);
+    fetch('https://picsum.photos/v2/list?page=2&limit=100')
+      .then(response => response.json())
+      .then(data => {
+        console.log("data");
+        console.log(data);
 
-      const string = imgArray.reduce((total, img) => {
-        return total + img + '|';
-      },[""])
-     return string.slice(0, -1);
-      
+        generateImageElement(data, document.querySelector(".img-1"), 3, 200, 200);
+        generateImageElement(data, document.querySelector(".img-2"), 30, 300, 300);
+        generateImageElement(data, document.querySelector(".img-3"), 4, 200, 200);
+
+      });
+
+
+
+    function generatePreview(data, numberOfPictures, height, width) {
+      arrayPaths = [];
+      for (let i = 0; i < numberOfPictures; i++) {
+        const randomId = Math.floor(Math.random() * 99) + 1;
+        if (data[randomId] != undefined) {
+          const rand = data[randomId].id;
+          arrayPaths.push(`https://picsum.photos/id/${rand}/${height}/${width}`);
+        }
+      }
+      return arrayPaths;
     }
 
-    const img = document.querySelector(".img2");
-    const path = createDataPreviewAtribute(array);
-    console.log(path);
-    console.log(img);
+    function createDataPreviewAtribute(imgArray) {
+      const string = imgArray.reduce((total, img) => {
+        return total + img + '|';
+      }, [""])
+      return string.slice(0, -1);
 
-    img.setAttribute("data-preview", path)
+    };
+
+    function generateImageElement(data, img, numberOfPictures, height, width) {
+      const arrayOfPaths = generatePreview(data, numberOfPictures, height, width);
+      const path = createDataPreviewAtribute(arrayOfPaths);
+      img.setAttribute("data-preview", path);
+      img.setAttribute("src", arrayOfPaths[0]);
+      // img.style.width = width + "px";
+      // img.style.height = height + "px";
+
+      const parentNote = img.parentNode;
+      parentNote.style.width = width + "px";
+      parentNote.style.height = height + "px";
+
+    };
 
 
   </script>
