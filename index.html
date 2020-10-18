@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./assets/style/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;900&display=swap" rel="stylesheet">
-  <title>Document fg</title>
+  <title>hover-preview by AviKKi</title>
 </head>
 
 <body>
@@ -20,9 +20,9 @@
       <header>
         <div><a href="https://github.com/AviKKi/hover-preview">hover-preview</a> by <a
             href="https://github.com/AviKKi">AviKKi</a> library demo</div>
-            <div>
-        <a href="https://github.com/AviKKi/hover-preview"><i class="fab fa-github"></i></a>
-      </div>
+        <div>
+          <a href="https://github.com/AviKKi/hover-preview"><i class="fab fa-github"></i></a>
+        </div>
       </header>
       <main>
         <div class="album">
@@ -127,12 +127,9 @@
       const path = createDataPreviewAtribute(arrayOfPaths);
       img.setAttribute("data-preview", path);
       img.setAttribute("src", arrayOfPaths[0]);
-      // img.style.width = width + "px";
-      // img.style.height = height + "px";
 
-      const parentNote = img.parentNode;
-      parentNote.style.width = width + "px";
-      parentNote.style.height = height + "px";
+      img.parentNode.style.width = width + "px";
+      img.parentNode.style.height = height + "px";
 
     };
 

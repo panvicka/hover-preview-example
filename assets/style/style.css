@@ -19,6 +19,7 @@ body {
   display: block;
   object-fit: cover;
   background-position: center;
+  cursor: pointer;
 }
 .img-container .fa-play {
   position: absolute;
