@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assests/style/style.css">
+
+  <title>Document fg</title>
+</head>
+
+<body>
+  <img width="150px" height="150px" class="hover-preview img-preview"
+    src="https://dummyimage.com/800x800/111/fff&text=Hover-me"
+    data-preview="https://dummyimage.com/800x800/111/fff&text=1|https://dummyimage.com/800x800/111/fff&text=2|https://dummyimage.com/800x800/111/fff&text=3" />
+
+  <img  class="hover-preview img-preview img2"
+    src="https://dummyimage.com/800x800/111/fff&text=Hover-me" />
+
+  <p>ddfsdfgfdd</p>
+
+  <!-- <script type="text/javascript" src='https://raw.githubusercontent.com/AviKKi/hover-preview/main/dist/hover-preview.min.js'></script> -->
+  <script src="../src/hover-preview.min.js"></script>
+
+
+  <script>
+
+    const array = [
+    "../assests/img/norway/seth-kane-XOEAHbE_vO8-unsplash.jpg",
+    "../assests/img/norway/michael-fousert-0962p7mcux4-unsplash.jpg",
+     
+
+    ];
+
+    function createDataPreviewAtribute(imgArray) {
+      console.log(imgArray);
+
+      const string = imgArray.reduce((total, img) => {
+        return total + img + '|';
+      },[""])
+     return string.slice(0, -1);
+      
+    }
+
+    const img = document.querySelector(".img2");
+    const path = createDataPreviewAtribute(array);
+    console.log(path);
+    console.log(img);
+
+    img.setAttribute("data-preview", path)
+
+
+  </script>
+
+
+</body>
+
+</html>

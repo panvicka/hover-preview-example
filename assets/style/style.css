@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.img-preview {
+    margin: 10em;
+    transition: all 0.3s linear;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+}
